@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAR-T细胞治疗知识问答系统</title>
+    <meta name="description" content="专业的CAR-T细胞治疗知识问答平台，帮助医护人员和学生学习CAR-T技术相关知识">
+    <meta name="keywords" content="CAR-T,细胞治疗,医学知识,问答系统,在线学习">
+    <meta name="author" content="CAR-T Quiz System">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CAR-T细胞治疗知识问答系统">
+    <meta property="og:description" content="专业的CAR-T细胞治疗知识问答平台，帮助医护人员和学生学习CAR-T技术相关知识">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23007AFF'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>CAR</text></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div id="loginScreen" class="screen active">
+        <div class="container">
+            <div class="card">
+                <div class="header">
+                    <svg class="logo" viewBox="0 0 100 100" width="60" height="60">
+                        <circle cx="50" cy="50" r="45" fill="#007AFF" stroke="#0056D3" stroke-width="2"/>
+                        <text x="50" y="60" text-anchor="middle" fill="white" font-size="24" font-weight="bold">CAR</text>
+                    </svg>
+                    <h1>CAR-T知识问答系统</h1>
+                    <p class="subtitle">欢迎参加CAR-T细胞治疗知识测试</p>
+                </div>
+                
+                <div class="form-container">
+                    <h2>用户登录</h2>
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <input type="text" id="username" placeholder="请输入用户名" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="password" placeholder="请输入密码" required>
+                        </div>
+                        <button type="submit" class="btn-primary">登录</button>
+                    </form>
+                    
+                    <div class="link-section">
+                        <p>还没有账号？<a href="#" id="showRegister">立即注册</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册界面 -->
+    <div id="registerScreen" class="screen">
+        <div class="container">
+            <div class="card">
+                <div class="header">
+                    <h2>用户注册</h2>
+                    <p class="subtitle">请创建您的账号</p>
+                </div>
+                
+                <div class="form-container">
+                    <form id="registerForm">
+                        <div class="input-group">
+                            <input type="text" id="newUsername" placeholder="请输入用户名" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="newPassword" placeholder="请输入密码" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="confirmPassword" placeholder="请确认密码" required>
+                        </div>
+                        <button type="submit" class="btn-primary">注册</button>
+                    </form>
+                    
+                    <div class="link-section">
+                        <p>已有账号？<a href="#" id="showLogin">返回登录</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 回顾模块 -->
+    <div id="reviewScreen" class="screen">
+        <div class="container">
+            <div class="card">
+                <div class="header">
+                    <h2>欢迎回来，<span id="welcomeUser"></span>！</h2>
+                    <p class="subtitle">查看您的答题历史</p>
+                </div>
+                
+                <div id="historyContainer" class="history-container">
+                    <!-- 历史记录将在这里显示 -->
+                </div>
+                
+                <div class="button-group">
+                    <button id="startQuiz" class="btn-primary">开始本次答题</button>
+                    <button id="logout" class="btn-secondary">退出登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 答题模块 -->
+    <div id="quizScreen" class="screen">
+        <div class="container">
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <span id="progressText" class="progress-text">1/10</span>
+                    </div>
+                    <div class="quiz-category" id="quizCategory">知识分类</div>
+                </div>
+                
+                <div class="quiz-content">
+                    <h3 id="questionTitle" class="question-title">问题标题</h3>
+                    <p id="questionDescription" class="question-description">问题描述</p>
+                    
+                    <div id="answerOptions" class="answer-options">
+                        <!-- 选项将在这里动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="quiz-footer">
+                    <button id="nextQuestion" class="btn-primary" disabled>下一题</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 结果展示模块 -->
+    <div id="resultScreen" class="screen">
+        <div class="container">
+            <div class="card">
+                <div class="result-header">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 120 120" class="score-svg">
+                            <circle cx="60" cy="60" r="50" class="score-bg"></circle>
+                            <circle cx="60" cy="60" r="50" class="score-fill" id="scoreCircle"></circle>
+                        </svg>
+                        <div class="score-text">
+                            <span id="scorePercentage">0%</span>
+                            <span class="score-label">正确率</span>
+                        </div>
+                    </div>
+                    <h2>答题完成！</h2>
+                    <p id="scoreDescription" class="score-description"></p>
+                </div>
+                
+                <div id="wrongAnswersContainer" class="wrong-answers">
+                    <!-- 错题汇总将在这里显示 -->
+                </div>
+                
+                <div class="button-group">
+                    <button id="retakeQuiz" class="btn-primary">再答一次</button>
+                    <button id="backToLogin" class="btn-secondary">下次再答</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入题库数据文件 -->
+    <script src="questions-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
