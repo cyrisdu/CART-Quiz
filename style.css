@@ -667,93 +667,80 @@ body {
     margin-bottom: var(--spacing-lg);
 }
 
-.wrong-answers {
+/* 全部答对的成功样式 */
+.perfect-score {
     margin: var(--spacing-lg);
     padding: var(--spacing-xl);
-    background: #FFF9F9;
+    background: linear-gradient(135deg, #F0FFF4, #E8F8E8);
     border-radius: var(--radius-small);
-    border-left: 4px solid var(--danger-color);
-    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.08);
+    border-left: 4px solid var(--success-color);
+    box-shadow: 0 2px 8px rgba(52, 199, 89, 0.12);
+    text-align: center;
 }
 
-.wrong-answers h3 {
-    color: var(--danger-color);
-    margin-bottom: var(--spacing-lg);
-    font-size: 20px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.wrong-answers h3::before {
-    content: "❌";
-    font-size: 18px;
-}
-
-.wrong-answer-item {
-    background: white;
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-small);
-    margin-bottom: var(--spacing-lg);
-    border: 1px solid #FFE6E6;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.wrong-answer-item:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.wrong-answer-item:last-child {
-    margin-bottom: 0;
-}
-
-.wrong-question {
-    font-weight: 600;
-    color: var(--text-primary);
+.perfect-score h3 {
+    color: var(--success-color);
     margin-bottom: var(--spacing-md);
-    font-size: 16px;
-    line-height: 1.6;
-    padding-left: var(--spacing-md);
-    position: relative;
-}
-
-.wrong-question::before {
-    content: "Q";
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: var(--danger-color);
-    color: white;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    font-size: 22px;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.correct-answer {
-    color: var(--success-color);
-    font-size: 15px;
-    font-weight: 600;
-    padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(52, 199, 89, 0.1);
-    border-radius: var(--radius-small);
-    border-left: 3px solid var(--success-color);
-    display: flex;
-    align-items: center;
     gap: var(--spacing-sm);
 }
 
-.correct-answer::before {
-    content: "✅";
-    font-size: 14px;
+.perfect-score p {
+    color: var(--text-primary);
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 错题显示 - 简化扁平化设计 */
+.errors-section {
+    margin: var(--spacing-md) 0;
+}
+
+.errors-title {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    padding: 0 var(--spacing-md);
+}
+
+.errors-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-md);
+}
+
+.error-item {
+    background: #FAFAFA;
+    border-radius: var(--radius-small);
+    border: 1px solid #E8E8E8;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.question-text {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: white;
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.answer-text {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: #F8FFF8;
+    color: var(--success-color);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
 }
 
 /* 响应式设计 */
@@ -785,6 +772,51 @@ body {
     
     #scorePercentage {
         font-size: 24px;
+    }
+    
+    .perfect-score {
+        margin: var(--spacing-md);
+        padding: var(--spacing-lg);
+    }
+    
+    .perfect-score h3 {
+        font-size: 20px;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .perfect-score p {
+        font-size: 15px;
+    }
+    
+    .errors-section {
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .errors-title {
+        font-size: 16px;
+        margin-bottom: var(--spacing-md);
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .errors-list {
+        gap: var(--spacing-md);
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .error-item {
+        border-radius: 8px;
+    }
+    
+    .question-text {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    
+    .answer-text {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 14px;
     }
 }
 
@@ -841,4 +873,6 @@ body {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
-} 
+}
+
+ 
