@@ -423,12 +423,18 @@ body {
     color: white;
     width: 28px;
     height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
     font-size: 14px;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .option.selected .option-letter {
@@ -598,6 +604,25 @@ body {
     
     .question-title {
         font-size: 18px;
+    }
+    
+    .option {
+        padding: 14px 16px;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .option-letter {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+        min-height: 26px;
+        max-width: 26px;
+        max-height: 26px;
+        font-size: 13px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        aspect-ratio: 1;
     }
     
     .score-circle {
