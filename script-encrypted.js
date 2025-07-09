@@ -302,15 +302,12 @@ function showUserHistory() {
     } else {
         const latestHistory = currentUser.history[currentUser.history.length - 1];
         
-        // 处理错题显示
+        // 处理错题显示 - 简化版本
         let wrongQuestionsHtml = '';
         if (latestHistory.wrongQuestions.length > 0) {
             wrongQuestionsHtml = `
-                <div class="history-errors">
-                    <div class="history-errors-title">
-                        <span class="error-icon">❌</span>
-                        <span>错题回顾 (${latestHistory.wrongQuestions.length}题)</span>
-                    </div>
+                <div class="history-errors-section">
+                    <h4 class="history-errors-title">📝 错题回顾 (${latestHistory.wrongQuestions.length}题)</h4>
                     <div class="history-errors-list">
                         ${latestHistory.wrongQuestions.map((question, index) => {
                             // 处理新旧数据格式兼容
@@ -338,21 +335,10 @@ function showUserHistory() {
                             }
                             
                             return `
-                            <div class="history-error-item">
-                                <div class="error-content">
-                                    <div class="error-header">
-                                        <div class="error-number">${index + 1}</div>
-                                        <div class="error-question">${questionText.length > 60 ? questionText.substring(0, 60) + '...' : questionText}</div>
-                                        <div class="error-toggle" onclick="toggleErrorAnswer(this)">
-                                            <span class="toggle-arrow">▶</span>
-                                        </div>
-                                    </div>
-                                    <div class="error-answer" style="display: none;">
-                                        <div class="answer-label">正确答案:</div>
-                                        <div class="answer-text">${correctAnswer}</div>
-                                    </div>
+                                <div class="history-error-item">
+                                    <div class="history-question-text">${questionText}</div>
+                                    <div class="history-answer-text">✅ ${correctAnswer}</div>
                                 </div>
-                            </div>
                             `;
                         }).join('')}
                     </div>
@@ -368,9 +354,11 @@ function showUserHistory() {
         }
         
         container.innerHTML = `
-            <div class="history-item">
-                <div class="history-score">${latestHistory.score}分</div>
-                <div class="history-date">上次答题时间：${latestHistory.date}</div>
+            <div class="history-card">
+                <div class="history-header">
+                    <div class="history-score">${latestHistory.score}分</div>
+                    <div class="history-date">${latestHistory.date}</div>
+                </div>
                 ${wrongQuestionsHtml}
             </div>
         `;
@@ -648,22 +636,4 @@ function viewUserData() {
     return users;
 }
 
-// 切换错题答案显示
-function toggleErrorAnswer(toggleElement) {
-    const errorItem = toggleElement.closest('.history-error-item');
-    const errorAnswer = errorItem.querySelector('.error-answer');
-    const arrow = toggleElement.querySelector('.toggle-arrow');
-    
-    if (errorAnswer.style.display === 'none' || errorAnswer.style.display === '') {
-        errorAnswer.style.display = 'block';
-        arrow.style.transform = 'rotate(90deg)';  // 展开时箭头向下
-        toggleElement.classList.add('expanded');
-        
-        // 添加展开动画
-        errorAnswer.style.animation = 'slideDown 0.3s ease-out';
-    } else {
-        errorAnswer.style.display = 'none';
-        arrow.style.transform = 'rotate(180deg)';  // 收起时箭头向左
-        toggleElement.classList.remove('expanded');
-    }
-} 
+ 
